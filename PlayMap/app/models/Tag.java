@@ -22,12 +22,14 @@ public class Tag extends Model {
     public List<ImageModel> imagesWithTag = new ArrayList<ImageModel>();
 
     public static List<Long> getIDsImagesWithTag(String tagName, String tagValue) {
+
         /* Yes this is probably a slow way of doing it, just hacking this up for quick demonstration */
         /* Will use JSON mapping and efficiency later */
 
         Tag tag = finderTag.where().eq("name", tagName).eq("value", tagValue).findUnique();
 
         List<Long> imageIds = new ArrayList<Long>();
+        if(tag == null) return null;
         for(ImageModel model : tag.imagesWithTag) {
             imageIds.add(model.id);
         }

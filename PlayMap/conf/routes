@@ -3,11 +3,12 @@
 # ~~~~
 
 # Home page
-GET         /                     controllers.Application.index()
+GET         /                      controllers.Application.index()
 
 POST        /images                controllers.Application.addImage()
 POST        /images/:id/tag        controllers.Application.addTag(id: Long)
 GET         /images                controllers.Application.getImages
+GET         /images/tag/:tagName/:tagValue    controllers.Application.getImagesByTag(tagName: String, tagValue: String)
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file         controllers.Assets.at(path="/public", file)
+GET         /assets/*file          controllers.Assets.at(path="/public", file)

@@ -1,6 +1,8 @@
 package controllers;
 
+import java.util.List;
 import models.ImageModel;
+import models.Tag;
 import org.codehaus.jackson.node.ObjectNode;
 import play.*;
 import play.data.DynamicForm;
@@ -38,6 +40,13 @@ public class Application extends Controller {
         image.addTag("theme", theme);
 
         return ok();
+    }
+
+    public static Result getImagesByTag(String tagName, String tagValue) {
+        List<Long> imageIds = Tag.getIDsImagesWithTag(tagName, tagValue);
+        ObjectNode response = Json.newObject();
+        response.put("images", Json.toJson(imageIds));
+        return ok(response);
     }
   
 }
